@@ -270,6 +270,7 @@ function Background() {
 export default function Page() {
   const [mounted, setMounted] = useState(false);
   const [saved, setSaved] = useState<Saved | null>(null);
+  const [editing, setEditing] = useState(false);
   const [now, setNow] = useState(0);
   const [dateInput, setDateInput] = useState("");
   const [labelInput, setLabelInput] = useState("");
@@ -402,7 +403,25 @@ export default function Page() {
     setStartedAt(next.startedAt);
     setCelebrationTarget(null);
     completedTarget.current = null;
+    setEditing(false);
     setSaved(next);
+  }
+
+  function editCountdown() {
+    if (!saved) return;
+    setLabelInput(saved.label);
+    setDateInput(toLocalDateTime(new Date(saved.target)));
+    setError("");
+    setEditing(true);
+  }
+
+  function cancelEdit() {
+    if (saved) {
+      setLabelInput(saved.label);
+      setDateInput(toLocalDateTime(new Date(saved.target)));
+    }
+    setError("");
+    setEditing(false);
   }
 
   function choosePreset(daysFromNow: number) {
@@ -426,10 +445,11 @@ export default function Page() {
     setDateInput("");
     setLabelInput("");
     setCelebrationTarget(null);
+    setEditing(false);
   }
 
   return (
-    <main className={`${font.className} relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-16 text-white sm:px-8`}>
+    <main className={`${font.className} countdown-page relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-16 text-white sm:px-8`}>
       <MotionConfig reducedMotion="user">
         <Background />
         <AnimatePresence>
@@ -439,14 +459,14 @@ export default function Page() {
         </AnimatePresence>
         {!mounted ? null : (
         <AnimatePresence mode="wait">
-          {!saved ? (
+          {!saved || editing ? (
             <motion.section
               key="form"
               initial={{ opacity: 0, y: 24, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -24, scale: 0.97 }}
               transition={{ type: "spring", stiffness: 220, damping: 24 }}
-              className="relative w-full max-w-lg overflow-hidden rounded-[32px] border border-white/[0.12] bg-[#111522]/75 p-7 shadow-[0_32px_120px_-40px_rgba(0,0,0,0.9)] backdrop-blur-2xl sm:p-10"
+              className="countdown-form-card relative w-full max-w-lg overflow-hidden rounded-[32px] border border-white/[0.12] bg-[#111522]/75 p-7 shadow-[0_32px_120px_-40px_rgba(0,0,0,0.9)] backdrop-blur-2xl sm:p-10"
             >
               <div className="mb-8 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
@@ -545,8 +565,17 @@ export default function Page() {
                 type="submit"
                 className="mt-7 w-full rounded-2xl bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-400 py-4 text-[15px] font-extrabold tracking-wide text-white shadow-[0_12px_42px_-16px_rgba(192,95,255,0.75)] transition-shadow hover:shadow-[0_16px_48px_-14px_rgba(192,95,255,0.8)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-200"
               >
-                Start the countdown <span aria-hidden="true" className="ml-1">↗</span>
+                {editing ? "Save changes" : "Start the countdown"} <span aria-hidden="true" className="ml-1">↗</span>
               </motion.button>
+              {editing && (
+                <button
+                  type="button"
+                  onClick={cancelEdit}
+                  className="mt-3 w-full rounded-xl py-3 text-sm font-semibold text-slate-400 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-200"
+                >
+                  Cancel editing
+                </button>
+              )}
               </form>
             </motion.section>
           ) : (
@@ -609,11 +638,18 @@ export default function Page() {
               <motion.button
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={reset}
+                onClick={editCountdown}
                 className="mt-10 rounded-full border border-white/[0.12] bg-white/[0.04] px-7 py-3 text-sm font-semibold text-slate-300 backdrop-blur transition duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-200 sm:mt-12"
               >
-                Reset countdown
+                Edit countdown
               </motion.button>
+              <button
+                type="button"
+                onClick={reset}
+                className="mt-3 rounded-full px-5 py-2 text-xs font-semibold text-slate-500 transition hover:text-rose-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-200"
+              >
+                Reset countdown
+              </button>
             </motion.section>
           )}
         </AnimatePresence>

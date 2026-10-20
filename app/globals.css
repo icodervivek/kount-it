@@ -50,6 +50,138 @@ input[type="datetime-local"]:hover::-webkit-calendar-picker-indicator {
   opacity: 1;
 }
 
+@media (min-width: 768px) and (max-height: 900px) {
+  .countdown-page {
+    padding-block: 0.5rem;
+  }
+
+  .countdown-form-card {
+    padding: 1.25rem;
+  }
+
+  .countdown-form-card > div:first-child {
+    margin-bottom: 1rem;
+  }
+
+  .countdown-form-card h1 {
+    font-size: 2.35rem;
+  }
+
+  .countdown-form-card h1 + p {
+    margin-top: 0.625rem;
+    line-height: 1.4rem;
+  }
+
+  .countdown-form-card form label {
+    margin-top: 0.75rem;
+  }
+
+  .countdown-form-card form > div {
+    margin-top: 0.75rem;
+  }
+
+  .countdown-form-card form input {
+    padding-block: 0.625rem;
+  }
+
+  .countdown-form-card form > p {
+    margin-top: 0.375rem;
+  }
+
+  .countdown-form-card form > button[type="submit"] {
+    margin-top: 0.75rem;
+    padding-block: 0.7rem;
+  }
+}
+
+@media (max-width: 767px) and (max-height: 760px) {
+  .countdown-page {
+    justify-content: flex-start;
+    padding-block: 1rem;
+  }
+
+  .countdown-form-card {
+    padding: 1.125rem;
+  }
+
+  .countdown-form-card > div:first-child {
+    margin-bottom: 1rem;
+  }
+
+  .countdown-form-card h1 {
+    font-size: 2.1rem;
+  }
+
+  .countdown-form-card h1 + p {
+    margin-top: 0.625rem;
+    line-height: 1.4rem;
+  }
+
+  .countdown-form-card form label {
+    margin-top: 0.75rem;
+  }
+
+  .countdown-form-card form > div {
+    margin-top: 0.75rem;
+  }
+
+  .countdown-form-card form input {
+    padding-block: 0.625rem;
+  }
+
+  .countdown-form-card form > p {
+    margin-top: 0.375rem;
+  }
+
+  .countdown-form-card form > button[type="submit"] {
+    margin-top: 0.75rem;
+    padding-block: 0.7rem;
+  }
+}
+
+@media (max-width: 380px) and (max-height: 700px) {
+  .countdown-form-card {
+    padding: 1rem;
+  }
+
+  .countdown-form-card > div:first-child > div > p + p,
+  .countdown-form-card > p,
+  .countdown-form-card h1 + p,
+  .countdown-form-card form > p {
+    display: none;
+  }
+
+  .countdown-form-card > div:first-child {
+    margin-bottom: 0.875rem;
+  }
+
+  .countdown-form-card h1 {
+    font-size: 1.8rem;
+  }
+
+  .countdown-form-card h1 + p {
+    margin-top: 0.5rem;
+  }
+
+  .countdown-form-card form label,
+  .countdown-form-card form > div {
+    margin-top: 0.625rem;
+  }
+
+  .countdown-form-card form input {
+    padding-block: 0.5rem;
+  }
+
+  .countdown-form-card form button:not([type="submit"]) {
+    padding: 0.375rem 0.625rem;
+  }
+
+  .countdown-form-card form > button[type="submit"] {
+    margin-top: 0.625rem;
+    padding-block: 0.625rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
