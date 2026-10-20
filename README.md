@@ -1,6 +1,6 @@
 # Kount It
 
-Kount It is a personal countdown app for keeping the next big moment in sight. Create a countdown with an optional name, watch the days, hours, minutes, and seconds tick by, and celebrate when it reaches zero.
+Kount It is a personal countdown app for keeping the next big moment in sight. Create a countdown with an optional label, watch the days, hours, minutes, and seconds tick by, and celebrate when it reaches zero.
 
 ## Features
 
