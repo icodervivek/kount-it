@@ -54,7 +54,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## How to use
 
-1. Optionally enter a name for your countdown.
+1. Optionally enter a label for your countdown.
 2. Choose a future date and time, or use a quick date preset.
 3. Select **Start the countdown**.
 4. Use the sound control to enable or mute countdown sounds.
