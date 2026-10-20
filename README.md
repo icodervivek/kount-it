@@ -17,12 +17,26 @@ Kount It is a personal countdown app for keeping the next big moment in sight. C
 - Node.js 20 or later
 - npm
 
-## Getting started
+## Installation
 
-Install dependencies and start the development server:
+Clone the repository and change into the project directory:
+
+```bash
+git clone https://github.com/icodervivek/kount-it.git
+cd kount-it
+```
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+## Run locally
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
