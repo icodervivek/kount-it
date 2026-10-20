@@ -279,6 +279,7 @@ export default function Page() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [startedAt, setStartedAt] = useState(0);
   const [celebrationTarget, setCelebrationTarget] = useState<number | null>(null);
+  const dateInputRef = useRef<HTMLInputElement | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
   const chimedTarget = useRef<number | null>(null);
   const completedTarget = useRef<number | null>(null);
@@ -393,8 +394,16 @@ export default function Page() {
 
   function start() {
     const target = new Date(dateInput).getTime();
-    if (!dateInput || Number.isNaN(target)) return setError("Pick a date and time to count down to.");
-    if (target <= Date.now()) return setError("That moment has already passed. Choose a future date.");
+    if (!dateInput || Number.isNaN(target)) {
+      setError("Choose a date and time to start your countdown.");
+      dateInputRef.current?.focus();
+      return;
+    }
+    if (target <= Date.now()) {
+      setError("That date and time has already passed. Choose a future moment.");
+      dateInputRef.current?.focus();
+      return;
+    }
     const next = { target, label: labelInput.trim(), startedAt: Date.now() };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
@@ -489,7 +498,7 @@ export default function Page() {
               </h1>
               <p className="mt-4 max-w-sm text-[15px] leading-6 text-slate-400">Give something good a date. We’ll keep the seconds moving on this device.</p>
 
-              <form onSubmit={submitCountdown}>
+              <form noValidate onSubmit={submitCountdown}>
               <label className="mt-8 block text-xs font-bold uppercase tracking-[0.13em] text-slate-300" htmlFor="label">
                 Reason (optional)
               </label>
@@ -512,8 +521,8 @@ export default function Page() {
               </div>
               <input
                 id="date"
+                ref={dateInputRef}
                 type="datetime-local"
-                required
                 min={toLocalDateTime(new Date())}
                 value={dateInput}
                 aria-invalid={error ? true : undefined}
