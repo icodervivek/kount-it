@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kount It</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">◷</span>
+          <div>
+            <p class="eyebrow">Kount It</p>
+            <p class="tagline">A little closer every second</p>
+          </div>
+        </div>
+      </header>
+
+      <section id="form-view" hidden>
+        <p class="kicker">Make a moment of it</p>
+        <h1 id="form-title">What are you counting down to?</h1>
+        <form id="countdown-form" novalidate>
+          <label for="label">Reason <span>(optional)</span></label>
+          <input id="label" name="label" maxlength="80" placeholder="Launch day, birthday, exam…">
+
+          <div class="date-label">
+            <label for="date">Date and time</label>
+            <span>Your local time</span>
+          </div>
+          <input id="date" name="date" type="datetime-local" required>
+          <div class="presets" aria-label="Quick date options">
+            <button type="button" data-days="1">Tomorrow</button>
+            <button type="button" data-days="7">In a week</button>
+            <button type="button" data-days="30">In a month</button>
+          </div>
+          <p id="error" class="error" role="alert" hidden></p>
+          <button class="primary" type="submit" id="submit-button">Start the countdown</button>
+          <button class="quiet cancel" type="button" id="cancel-button" hidden>Cancel editing</button>
+        </form>
+      </section>
+
+      <section id="timer-view" hidden>
+        <p class="kicker" id="timer-kicker">Your next big moment</p>
+        <h1 id="timer-title"></h1>
+        <p class="target-date" id="target-date"></p>
+        <div class="timer" aria-live="off" aria-label="Time remaining">
+          <div><strong id="days">0</strong><span>days</span></div>
+          <div><strong id="hours">00</strong><span>hours</span></div>
+          <div><strong id="minutes">00</strong><span>minutes</span></div>
+          <div><strong id="seconds">00</strong><span>seconds</span></div>
+        </div>
+        <button class="secondary" id="edit-button" type="button">Edit countdown</button>
+        <button class="quiet reset" id="reset-button" type="button">Reset countdown</button>
+      </section>
+      <p id="storage-error" class="error" role="alert" hidden></p>
+    </main>
+  </body>
+</html>
