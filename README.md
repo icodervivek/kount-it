@@ -64,6 +64,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 The countdown is stored in this browser on this device. Clearing site data removes it. Browsers may require a user interaction before playing audio; sound is enabled by default and starts after the first interaction with the page.
 
+## Install as a web app
+
+Kount It includes a web app manifest, matching app icons, and a service worker that caches the homepage and its static assets for repeat visits and basic offline use. In a supported browser, open the deployed site over HTTPS and use the browser’s **Install app** option. On localhost, browsers also allow installation for development.
+
+The first visit requires a network connection so the app shell and assets can be cached. Countdown data continues to use the browser’s local storage.
+
 ## Chrome extension
 
 The Manifest V3 extension lives in `extension/` and runs independently of the website. Its popup supports creating, editing, and resetting a countdown; Chrome storage keeps it between browser sessions, and an alarm shows a notification when it finishes.
