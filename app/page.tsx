@@ -149,7 +149,7 @@ function Tile({
   accent: string;
   progress: number; // 0..1 ring fill
 }) {
-  const text = pad(value);
+  const text = unit === "days" ? String(value).padStart(2, "0") : pad(value);
   const R = 46;
   const C = 2 * Math.PI * R;
 
@@ -190,8 +190,9 @@ function Tile({
           className="absolute inset-0 flex items-center justify-center text-3xl font-extrabold tracking-[-0.08em] text-white sm:text-5xl"
           aria-hidden
         >
-          <Digit value={text[0]} />
-          <Digit value={text[1]} />
+          {text.split("").map((digit, index) => (
+            <Digit key={index} value={digit} />
+          ))}
         </div>
       </div>
 
